@@ -12,21 +12,25 @@ workflows:
         - << pipeline.parameters.trigger_release >>
         - matches: { pattern: "^release/v*.*.0", value: << pipeline.git.branch >> }
     jobs:
-      run_only_release:
-        docker: 
-          - image: cimg/base:stable
-        steps:
-          - run: |
-              echo "Branch is  << pipeline.git.branch >>"
-              echo "Trigger is: << pipeline.parameters.trigger_release >> 
+      - run_only_release
 
   run_every_time:
     jobs:
-      - :
-      docker: 
-        - image: cimg/base:stable
-      steps:
-        run: echo "Runs every time, 100% of the time"
+       - hello
+          
         
 
-  
+jobs:
+  hello: 
+    docker: 
+      - image: cimg/base:stable
+    steps:
+      run: echo "Runs every time, 100% of the time"
+    
+  run_only_release:
+    docker: 
+      - image: cimg/base:stable
+    steps:
+      - run: |
+          echo "Branch is  << pipeline.git.branch >>"
+          echo "Trigger is: << pipeline.parameters.trigger_release >>
