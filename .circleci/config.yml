@@ -10,7 +10,7 @@ workflows:
     when:
       or: 
         - << pipeline.parameters.trigger_release >>
-        - matches: { pattern: /^release\/v*.*.0/ value: << pipeline.git.branch >> }
+        - matches: { pattern: "^release\/v*.*.0", value: << pipeline.git.branch >> }
     jobs:
       run_only_release:
         docker: 
