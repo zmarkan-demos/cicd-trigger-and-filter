@@ -1,0 +1,34 @@
+version: 2.1
+
+parameters:
+  trigger_release:
+    type: boolean
+    default: false
+
+workflows:
+  release_and_trigger_only:
+    when:
+      or: 
+        - << pipeline.parameters.trigger_release >>
+        - matches: 
+            pattern: "/^release\/v*.*.0/"
+            value: << pipeline.git.branch >>
+    jobs:
+      run_only_release:
+        docker: 
+          - image: cimg/base:stable
+        steps:
+          - run: |
+              echo "Branch is  << pipeline.git.branch >>"
+              echo "Trigger is: << pipeline.parameters.trigger_release >> 
+
+  run_every_time:
+    jobs:
+      - :
+      docker: 
+        - image: cimg/base:stable
+      steps:
+        run: echo "Runs every time, 100% of the time"
+        
+
+  
