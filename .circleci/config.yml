@@ -33,4 +33,4 @@ jobs:
     steps:
       - run: |
           echo "Branch is  << pipeline.git.branch >>"
-          echo "Trigger is: << pipeline.parameters.trigger_release >>
+          echo "Trigger is: << pipeline.parameters.trigger_release >>"
