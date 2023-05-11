@@ -25,7 +25,7 @@ jobs:
     docker: 
       - image: cimg/base:stable
     steps:
-      run: echo "Runs every time, 100% of the time"
+      - run: echo "Runs every time, 100% of the time"
     
   run_only_release:
     docker: 
